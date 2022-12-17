@@ -1,0 +1,20 @@
+[
+  {
+    "id": 0,
+    "name": "COMPUTADOR PICHAU GAMER FREY III, AMD RYZEN 5 5600G, 16GB DDR4, SSD 480GB",
+    "price": "R$2.469,93",
+    "image": "https://media.pichau.com.br/media/catalog/product/…930bdf27/w/a/ward-mancer-amd-sem-gpu-pc-001_1.jpg"
+  },
+  {
+    "id": 1,
+    "name": "TECLADO GAMER TGT AK-47 RAINBOW, TGT-AK47-01",
+    "price": "R$39,90",
+    "image": "https://media.pichau.com.br/media/catalog/product/…5330323e505eba7ce930bdf27/t/g/tgt-ak47-013213.jpg"
+  },
+  {
+    "id": 2,
+    "name": "MONITOR GAMER SAMSUNG T350, 27, IPS, FHD, 5MS, 75HZ, FREESYNC, HDMI/VGA, LF27T350FHLMZD",
+    "price": "R$999,90",
+    "image": "https://media.pichau.com.br/media/catalog/product/…55330323e505eba7ce930bdf27/l/f/lf27t350fhlmzd.jpg"
+  }
+]

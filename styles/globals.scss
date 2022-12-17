@@ -1,0 +1,30 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Lato', sans-serif !important;
+}
+
+body {
+  width: 100vw !important;
+  min-height: 100vh !important;
+  height: auto !important;
+
+  font-size: 16px !important;
+  line-height: 1.42 !important;
+  color: #333 !important;
+
+  -webkit-font-smoothing: antialiased !important;
+
+  background-image: url('../public/images/background.jpg') !important;
+  background-size: cover !important;
+  background-attachment: fixed !important;
+  background-position: center top !important;
+  background-repeat: no-repeat !important; 
+
+  overflow-x: hidden !important;
+}
+
+#__next {
+  background: rgba(0,0,0,0.75) !important;
+}
