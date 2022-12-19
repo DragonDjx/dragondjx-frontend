@@ -1,15 +1,20 @@
-import { createContext, useCallback, useEffect, useState } from "react";
+import { 
+  createContext, 
+  useCallback, 
+  useState 
+} from "react";
 
 interface CartProvider {
   children: React.ReactNode
 };
 
-interface Cart {
+export interface Cart {
   id: number;
   name: string;
+  description?: string;
   price: string;
   image: string;
-}
+};
 
 interface CartInterface {
   cart: Array<Cart>,

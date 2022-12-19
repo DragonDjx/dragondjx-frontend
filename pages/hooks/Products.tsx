@@ -1,8 +1,9 @@
-import { Button, ButtonGroup, Card, CardBody, CardFooter, Divider, Flex, Heading, Image, Stack, Text } from "@chakra-ui/react";
+import { Button, ButtonGroup, Card, CardBody, CardFooter, Divider, Flex, Heading, Icon, Image, Stack, Text } from "@chakra-ui/react";
 import { useQuery } from "@tanstack/react-query";
 import { useContext } from "react";
 import products from "../../products.json";
-import { CartContext } from "../contexts/CartContext";
+import { Cart, CartContext } from "../contexts/CartContext";
+import { FaShoppingCart } from "react-icons/fa";
 
 const ProductsHook = () => {
   const { addToCart } = useContext(CartContext);
@@ -25,9 +26,13 @@ const ProductsHook = () => {
         display="flex"
         wrap="wrap"
       >
-        {products?.map(product => (
+        {products?.map((product: Cart) => (
           <>
-            <Card maxW='sm' key={product.id}>
+            <Card
+              maxW='sm'
+              key={product.id}
+              m="0.9rem"
+            >
               <CardBody>
                 <Image
                   src={product.image}
@@ -37,9 +42,7 @@ const ProductsHook = () => {
                 <Stack mt='6' spacing='3'>
                   <Heading size='md'>{product.name}</Heading>
                   <Text>
-                    This sofa is perfect for modern tropical spaces, baroque inspired
-                    spaces, earthy toned spaces and for people who love a chic design with a
-                    sprinkle of vintage design.
+                    {product.description}
                   </Text>
                   <Text color='blue.600' fontSize='2xl'>
                     {product.price}
@@ -50,10 +53,21 @@ const ProductsHook = () => {
               <CardFooter>
                 <ButtonGroup spacing='2'>
                   <Button variant='solid' colorScheme='blue'>
-                    Buy now
+                    Visualizar
                   </Button>
-                  <Button variant='ghost' colorScheme='blue'>
-                    Adicionar ao carrinho
+                  <Button
+                    variant='ghost'
+                    colorScheme='blue'
+                    onClick={() => addToCart(product)}
+                    display="inline-flex"
+                    alignItems="center"
+                    justifyContent="center"
+                    verticalAlign="middle"
+                  >
+                    <FaShoppingCart />
+                    <Text mx={2}>
+                      Adicionar ao carrinho
+                    </Text>
                   </Button>
                 </ButtonGroup>
               </CardFooter>

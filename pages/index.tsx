@@ -22,6 +22,7 @@ export default function Home() {
           as="h1"
           mb="2rem"
           fontWeight="900"
+          textAlign="center"
           fontSize={40}
         >
           Dragondjx - A melhor em oferecer o melhor

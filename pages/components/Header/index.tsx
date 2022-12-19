@@ -10,24 +10,36 @@ import {
   DrawerOverlay,
   DrawerContent,
   DrawerHeader,
-  DrawerFooter,
   DrawerCloseButton,
   DrawerBody,
-  useDisclosure
+  useDisclosure,
+  Card,
+  CardBody,
+  Heading,
+  Avatar,
 } from "@chakra-ui/react";
 import {
   BsSearch
 } from "react-icons/bs";
 import {
-  FaUserAlt,
   FaShoppingCart
 } from "react-icons/fa";
+import {
+  FiLogIn
+} from "react-icons/fi"
+import {
+  BiTrash
+} from "react-icons/bi";
 import Router from "next/router";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { Cart, CartContext } from "../../contexts/CartContext";
+import { AuthContext } from "../../contexts/AuthContext";
 
 export default function Header() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [search, setSearch] = useState('');
+  const { cart, removeFromCart } = useContext(CartContext);
+  const { isAuthenticated } = useContext(AuthContext);
 
   return (
     <>
@@ -42,12 +54,53 @@ export default function Header() {
           bg="#222"
           display="flex"
           flexDirection="column"
+          zIndex={9999}
         >
-          <DrawerCloseButton color="#fff"/>
+          <DrawerCloseButton
+            color="#fff"
+          />
           <DrawerHeader color="#fff">Carrinho de Compras</DrawerHeader>
 
           <DrawerBody>
-            {/* Cart logic here */}
+            {cart?.map((item: Cart) => (
+              <>
+                <Card
+                  direction={{ base: 'column', sm: 'row' }}
+                  overflow='hidden'
+                >
+                  <Image
+                    objectFit='cover'
+                    maxW={{ base: '20px', sm: '30px' }}
+                    maxH={{ base: '20px', sm: '30px' }}
+                    src={item.image}
+                    alt={item.name}
+                  />
+                  <CardBody>
+                    <Heading
+                      mt="-1.1rem"
+                      size='md'
+                      color="#fff"
+                    >{item.name}</Heading>
+                    <Text color='blue.600' fontSize='2xl'>
+                      {item.price}
+                    </Text>
+                    <IconButton
+                      variant='solid'
+                      colorScheme='transparent'
+                      aria-label="Trash Icon"
+                      cursor="pointer"
+                      title="Excluir item"
+                      marginLeft="11rem"
+                      _hover={{
+                        color: "#222"
+                      }}
+                      onClick={() => removeFromCart(item)}
+                      icon={<BiTrash />}
+                    ></IconButton>
+                  </CardBody>
+                </Card>
+              </>
+            ))}
           </DrawerBody>
         </DrawerContent>
       </Drawer>
@@ -60,7 +113,7 @@ export default function Header() {
         minH="75px"
         padding="1rem 4rem"
         background="#222"
-        zIndex={99999}
+        zIndex={999}
       >
         <Box
           display="inline-flex"
@@ -108,7 +161,7 @@ export default function Header() {
             borderRight="none"
             outlineColor="transparent"
             value={search || ''}
-            onChange={(e: any) => {setSearch(e.target.value)}}
+            onChange={(e: any) => { setSearch(e.target.value) }}
           />
 
           <IconButton
@@ -130,15 +183,29 @@ export default function Header() {
           alignItems="center"
           justifyContent="center"
         >
-          <Button
-            cursor="pointer"
-            backgroundColor="transparent"
-            border="none"
-            color="#c1c1c1"
-            mx={5}
-          >
-            <FaUserAlt fontSize={25} />
-          </Button>
+          {isAuthenticated ? (
+            <Avatar 
+              name="Livrodjx"
+              bg="#666"
+              src="https://images2.alphacoders.com/702/702226.jpg"
+              mx={5}
+              w={35}
+              h={35}
+              cursor="pointer"
+            />
+          ) : (
+           
+            <Button
+              cursor="pointer"
+              backgroundColor="transparent"
+              border="none"
+              color="#c1c1c1"
+              mx={5}
+              onClick={() => Router.push('/login')}
+            >
+              <FiLogIn fontSize={25} title="Login" />
+            </Button>
+          )}
 
           <Button
             onClick={onOpen}
